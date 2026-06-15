@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.ClazzMapper">
+    <insert id="save">
+        insert into clazz(name, room, begin_date, end_date, master_id, subject, create_time, update_time)
+        values(#{name}, #{room}, #{beginDate}, #{endDate}, #{masterId}, #{subject}, #{createTime}, #{updateTime})
+    </insert>
+
+    <update id="update">
+        update clazz
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="room != null">
+                room = #{room},
+            </if>
+            <if test="beginDate != null">
+                begin_date = #{beginDate},
+            </if>
+            <if test="endDate != null">
+                end_date = #{endDate},
+            </if>
+            <if test="masterId != null">
+                master_id = #{masterId},
+            </if>
+            <if test="subject != null">
+                subject = #{subject},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="getClazzs" resultType="com.itheima.pojo.Clazz">
+        SELECT
+            clazz.id,
+            clazz.name,
+            clazz.room,
+            clazz.begin_date AS beginDate,
+            clazz.end_date AS endDate,
+            clazz.master_id AS masterId,
+            dept.name AS subject,
+            clazz.create_time AS createTime,
+            clazz.update_time AS updateTime,
+            emp.name AS masterName
+        FROM clazz
+        LEFT JOIN emp ON clazz.master_id = emp.id
+        LEFT JOIN dept ON clazz.subject = dept.id
+        <where>
+            <if test="name != null and name != ''">
+                and clazz.name like concat('%',#{name},'%')
+            </if>
+            <if test="begin != null">
+                and clazz.begin_date >= #{begin}
+            </if>
+            <if test="end != null">
+                and clazz.end_date &lt;= #{end}
+            </if>
+        </where>
+        ORDER BY clazz.update_time DESC
+    </select>
+    <select id="findById" resultType="com.itheima.pojo.Clazz">
+        SELECT
+            clazz.id,
+            clazz.name,
+            clazz.room,
+            clazz.begin_date AS beginDate,
+            clazz.end_date AS endDate,
+            clazz.master_id AS masterId,
+            dept.name AS subject,
+            clazz.create_time AS createTime,
+            clazz.update_time AS updateTime,
+            emp.name AS masterName
+        FROM clazz
+        LEFT JOIN emp ON clazz.master_id = emp.id
+        LEFT JOIN dept ON clazz.subject = dept.id
+        WHERE clazz.id = #{id}
+    </select>
+</mapper>

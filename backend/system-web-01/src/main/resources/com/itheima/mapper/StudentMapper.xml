@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.StudentMapper">
+    <insert id="save">
+        INSERT INTO student (name, no, gender, phone, id_card, is_college, address, dept_id, graduation_date, clazz_id, create_time, update_time)
+        VALUES (#{name}, #{no}, #{gender}, #{phone}, #{idCard}, #{isCollege}, #{address}, #{deptId}, #{graduationDate}, #{clazzId},#{createTime},#{updateTime})
+    </insert>
+    <update id="update">
+        UPDATE student
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="no != null and no != '' ">
+                no = #{no},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="phone != null and phone != ''" >
+                phone = #{phone},
+            </if>
+            <if test="idCard != null and idCard != ''">
+                id_card = #{idCard},
+            </if>
+            <if test="isCollege != null">
+                is_college = #{isCollege},
+            </if>
+            <if test="address != null and address != '' ">
+                address = #{address},
+            </if>
+            <if test="deptId != null">
+                dept_id = #{deptId},
+            </if>
+            <if test="graduationDate != null">
+                graduation_date = #{graduationDate},
+            </if>
+            <if test="clazzId != null">
+                clazz_id = #{clazzId},
+            </if>
+            <if test="violationScore != null">
+                violation_score = #{violationScore},
+            </if>
+            <if test="violationCount != null">
+                violation_count = #{violationCount},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <select id="getStudents" resultType="com.itheima.pojo.Student">
+        SELECT
+            student.id,
+            student.name,
+            student.no,
+            student.gender,
+            student.phone,
+            student.id_card AS idCard,
+            student.is_college AS isCollege,
+            student.address,
+            student.dept_id AS deptId,
+            student.graduation_date AS graduationDate,
+            student.violation_count AS violationCount,
+            student.violation_score AS violationScore,
+            student.clazz_id AS clazzId,
+            clazz.name AS clazzName,
+            student.create_time AS createTime,
+            student.update_time AS updateTime
+        FROM student
+        LEFT JOIN clazz ON student.clazz_id = clazz.id
+        <where>
+            <if test="name != null and name!= ''">
+                AND student.name like concat('%',#{name},'%')
+            </if>
+            <if test="clazzId != null">
+                AND student.clazz_id = #{clazzId}
+            </if>
+            <if test="deptId != null">
+                AND student.dept_id = #{deptId}
+            </if>
+        </where>
+        ORDER BY student.update_time DESC
+    </select>
+    <select id="getStudentDegreeData" resultType="java.util.Map">
+        select dept.name,count(0) sum from  student join dept on student.dept_id = dept.id group by dept.name;
+    </select>
+</mapper>

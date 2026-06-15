@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: system-web-01
+  #数据库的配置
+  # 🔒 敏感信息：生产环境请使用环境变量 ${DB_USERNAME} ${DB_PASSWORD} 替换
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/web01
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:your_password_here}
+  servlet:
+    multipart:
+      #最大文件大小（单个文件）
+      max-file-size: 10MB
+      #最大请求（请求包含多个文件时）
+      max-request-size: 50MB
+#静态资源配置
+  web:
+    resources:
+      static-locations: classpath:/static/,file:D:/images/
+#mybatis配置
+mybatis:
+  configuration:
+    #打印sql
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #驼峰命名
+    map-underscore-to-camel-case: true
+#spring事务管理日志
+logging:
+  level:
+    org.springframework.jdbc.support.JdbcTransactionManager: debug
+
+#阿里云OSS
+aliyun:
+  oss:
+    endpoint: https://oss-cn-beijing.aliyuncs.com
+    bucketName: zhao-java
+    region: cn-beijing
