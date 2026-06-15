@@ -4,6 +4,9 @@
 <img width="1241" height="700" alt="image" src="https://github.com/user-attachments/assets/df32ad45-8786-4258-a7b3-5e3bd7cc02ec" />
 动漫话主题，使用ai调试的基础系统java高级工程师的第一个项目嘿嘿
 <img width="1256" height="615" alt="image" src="https://github.com/user-attachments/assets/70d05d50-6674-45a7-83d1-5ba63e3bc11f" />
+加油一定要成为Java高级工程师啊
+<img width="1216" height="638" alt="image" src="https://github.com/user-attachments/assets/af223d3a-9840-42aa-ba2d-018adc6724f5" />
+
 
 
 
