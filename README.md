@@ -1,6 +1,9 @@
 # 我的第一个Java前端
 
 全栈项目 - Vue 3 前端 + Spring Boot 后端
+<img width="1241" height="700" alt="image" src="https://github.com/user-attachments/assets/df32ad45-8786-4258-a7b3-5e3bd7cc02ec" />
+动漫话主题，使用ai调试的基础系统java高级工程师的第一个项目嘿嘿
+
 
 ## 项目结构
 
