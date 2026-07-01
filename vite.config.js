@@ -13,6 +13,7 @@ export default defineConfig({
     }
   },
   server: {
+    allowedHosts: ['.monkeycode-ai.online'],
     fs: {
       allow: [__dirname, 'D:/images']
     },

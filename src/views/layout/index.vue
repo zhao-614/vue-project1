@@ -1,5 +1,8 @@
 <template>
-  <el-container class="app-container">
+  <div class="layout-wrapper">
+    <!-- 粒子特效背景 — 浮在最顶层，鼠标穿透 -->
+    <ParticleBg id="layout-particle-bg" />
+    <el-container class="app-container">
     <!-- 侧边栏：漫画割裂边框 + 极致高透玻璃 -->
     <el-aside :width="isCollapse ? '64px' : '240px'" class="sidebar">
       <!-- Logo区域 -->
@@ -141,6 +144,7 @@
       </el-main>
     </el-container>
   </el-container>
+  </div>
 </template>
 
 <script setup>
@@ -153,6 +157,7 @@ import {
 } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import router from '@/router'
+import ParticleBg from '@/components/ParticleBg.vue'
 
 const route = useRoute()
 const isCollapse = ref(false)

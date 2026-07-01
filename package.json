@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tsparticles/slim": "^4.3.0",
+    "@tsparticles/vue3": "^4.3.0",
     "axios": "^1.16.1",
     "echarts": "^6.1.0",
     "element-plus": "^2.4.4",

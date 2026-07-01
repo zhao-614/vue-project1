@@ -5,7 +5,17 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs'  // 引入中文语言包
 import App from './App.vue'
 import router from './router'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import VueParticles from '@tsparticles/vue3'
+import { loadSlim } from '@tsparticles/slim'
+
 const app = createApp(App)
+
+app.use(VueParticles, {
+  init: async (engine) => {
+    await loadSlim(engine)
+  }
+})
+
 app.use(ElementPlus, {
   locale: zhCn  // 配置中文语言
 })
